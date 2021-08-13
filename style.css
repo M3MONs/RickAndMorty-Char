@@ -64,8 +64,10 @@ ul {
 }
 
 #image {
-   width: 300px;
-   height: 300px;
+   max-width: 300px;
+   max-height: 300px;
+   height: 90vw;
+   width: 90vw;
    border-radius: 50%;
    border: 4px solid rgb(0, 35, 51);
    background: rgb(0, 35, 51);
@@ -74,7 +76,7 @@ ul {
 
 .char-info {
    margin-top: -20px;
-   padding: 15px 10px 5px;
+   padding: 20px 20px 5px;
    background: rgb(0, 35, 51);
    text-shadow: 2px 2px black;
    color: white;
@@ -83,6 +85,7 @@ ul {
    max-width: 500px;
    min-height: 140px;
    height: auto;
+   border-radius: 3rem;
    display: flex;
    justify-content: center;
    flex-direction: column;
@@ -115,8 +118,42 @@ ul {
    color: orange;
 }
 
+.btns-container{
+   max-width: 200px;
+   width: 80%;
+   display: flex;
+   justify-content: space-around;
+}
+
+.btns-container button{
+   background:none;
+   border-radius: 50%;
+   padding: .5rem;
+   border: 2px solid black;
+   cursor: pointer;
+   transition: background 1s ease;
+}
+
+.btns-container button:hover{
+   background: rgb(0, 141, 0);
+}
+
+.svg-icon {
+   width: 2rem;
+   height: 2rem;
+ }
+ 
+ .svg-icon path,
+ .svg-icon polygon,
+ .svg-icon rect {
+   fill: black;
+ }
+
 @media (min-width: 768px) {
    .logo {
       display: block;
+   }
+   .char-info {
+      padding-top: 5px;
    }
 }
