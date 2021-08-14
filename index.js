@@ -16,8 +16,15 @@ const getCharacter = async () => {
    return characterData;
 };
 
+const episodeName = async(episode)=>{
+   const response = await fetch(episode)
+   const episodeData = await response.json();
+   return episodeData.name
+}
+
 const displayData = async () => {
    const character = await getCharacter();
+   const episode  =await episodeName(character.episode[character.episode.length - 1])
    dataContainer.innerHTML = `<img src="${character.image}" alt="" id="image" />
    <ul class="char-info">
       <div>
@@ -31,7 +38,7 @@ const displayData = async () => {
       <li id="location"><h5>Location: </h5>${character.location.name}</li>
       </div>
    </ul>
-   <div class="desktop"><h5>Last episode: </h5></div>`;
+   <h5 class="desktop">Last episode: <span>${episode}</span></h5>`;
 };
 
 displayData();
