@@ -16,16 +16,30 @@ const getCharacter = async () => {
    return characterData;
 };
 
+const episodeName = async(episode)=>{
+   const response = await fetch(episode)
+   const episodeData = await response.json();
+   return episodeData.name
+}
+
 const displayData = async () => {
    const character = await getCharacter();
+   const episode  =await episodeName(character.episode[character.episode.length - 1])
    dataContainer.innerHTML = `<img src="${character.image}" alt="" id="image" />
    <ul class="char-info">
-      <li id="name">${character.name}</li>
-      <li id="status" class="${character.status}">${character.status}</li>
-      <li id="species">${character.species}</li>
-      <li id="gender">${character.gender}</li>
-      <li id="location">${character.location.name}</li>
-   </ul>`;
+      <div>
+      <li id="name"><h5>Name: </h5>${character.name}</li>
+      <li id="status" class="${character.status}"><h5>Status: </h5>${character.status}</li>
+      </div>
+      <hr>
+      <div>
+      <li id="species"><h5>Species: </h5>${character.species}</li>
+      <li id="gender"><h5>Gender: </h5>${character.gender}</li>
+      <li id="location"><h5>Location: </h5>${character.location.name}</li>
+      </div>
+      <hr>
+   </ul>
+   <h5 class="desktop">Last episode: <span>${episode}</span></h5>`;
 };
 
 displayData();
@@ -40,7 +54,7 @@ nextBtn.addEventListener("click", () => {
 });
 prevBtn.addEventListener("click", () => {
    setTimeout(() => {
-      if (ID >1) {
+      if (ID > 1) {
          ID--;
          displayData();
       }
