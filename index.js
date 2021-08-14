@@ -20,12 +20,18 @@ const displayData = async () => {
    const character = await getCharacter();
    dataContainer.innerHTML = `<img src="${character.image}" alt="" id="image" />
    <ul class="char-info">
-      <li id="name">${character.name}</li>
-      <li id="status" class="${character.status}">${character.status}</li>
-      <li id="species">${character.species}</li>
-      <li id="gender">${character.gender}</li>
-      <li id="location">${character.location.name}</li>
-   </ul>`;
+      <div>
+      <li id="name"><h5>Name: </h5>${character.name}</li>
+      <li id="status" class="${character.status}"><h5>Status: </h5>${character.status}</li>
+      <br>
+      </div>
+      <div>
+      <li id="species"><h5>Species: </h5>${character.species}</li>
+      <li id="gender"><h5>Gender: </h5>${character.gender}</li>
+      <li id="location"><h5>Location: </h5>${character.location.name}</li>
+      </div>
+   </ul>
+   <div class="desktop"><h5>Last episode: </h5></div>`;
 };
 
 displayData();
@@ -40,7 +46,7 @@ nextBtn.addEventListener("click", () => {
 });
 prevBtn.addEventListener("click", () => {
    setTimeout(() => {
-      if (ID >1) {
+      if (ID > 1) {
          ID--;
          displayData();
       }
