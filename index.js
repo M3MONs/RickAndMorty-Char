@@ -30,13 +30,14 @@ const displayData = async () => {
       <div>
       <li id="name"><h5>Name: </h5>${character.name}</li>
       <li id="status" class="${character.status}"><h5>Status: </h5>${character.status}</li>
-      <br>
       </div>
+      <hr>
       <div>
       <li id="species"><h5>Species: </h5>${character.species}</li>
       <li id="gender"><h5>Gender: </h5>${character.gender}</li>
       <li id="location"><h5>Location: </h5>${character.location.name}</li>
       </div>
+      <hr>
    </ul>
    <h5 class="desktop">Last episode: <span>${episode}</span></h5>`;
 };
