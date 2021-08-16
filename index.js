@@ -1,31 +1,49 @@
 let ID = 1; //Start ID
 
 //DOM
+//SearchBar
+const searchBtn = document.getElementById("searchBtn");
+const searchInput = document.getElementById("searchInput");
 //Character
-// const charImg = document.getElementById('image')
 const dataContainer = document.getElementById("dataContainer");
 //Btns
 const nextBtn = document.getElementById("next");
 const prevBtn = document.getElementById("prev");
 
 const getCharacter = async () => {
-   const response = await fetch(
-      `https://rickandmortyapi.com/api/character/${ID}`
-   );
-   const characterData = await response.json();
-   return characterData;
+  const response = await fetch(
+    `https://rickandmortyapi.com/api/character/${ID}`
+  );
+  const characterData = await response.json();
+  displayData(characterData);
 };
 
-const episodeName = async(episode)=>{
-   const response = await fetch(episode)
-   const episodeData = await response.json();
-   return episodeData.name
-}
+getCharacter();
 
-const displayData = async () => {
-   const character = await getCharacter();
-   const episode  =await episodeName(character.episode[character.episode.length - 1])
-   dataContainer.innerHTML = `<img src="${character.image}" alt="" id="image" />
+const getCharacterByName = async (name) => {
+  try {
+    const response = await fetch(
+      `https://rickandmortyapi.com/api/character/?name=${name}`
+    );
+    const characterData = await response.json();
+    displayData(characterData.results[0]);
+    ID = characterData.results[0].id;
+  } catch {
+    console.log("Error");
+  }
+};
+
+const episodeName = async (episode) => {
+  const response = await fetch(episode);
+  const episodeData = await response.json();
+  return episodeData.name;
+};
+
+const displayData = async (character) => {
+  const episode = await episodeName(
+    character.episode[character.episode.length - 1]
+  );
+  dataContainer.innerHTML = `<img src="${character.image}" alt="" id="image" />
    <ul class="char-info">
       <div>
       <li id="name"><h5>Name: </h5>${character.name}</li>
@@ -42,21 +60,26 @@ const displayData = async () => {
    <h5 class="desktop">Last episode: <span>${episode}</span></h5>`;
 };
 
-displayData();
+searchBtn.addEventListener("click", () => {
+  if (searchInput.value !== "") {
+    const name = searchInput.value.toLowerCase();
+    getCharacterByName(name);
+  }
+});
 
 nextBtn.addEventListener("click", () => {
-   setTimeout(() => {
-      if (ID < 671) {
-         ID++;
-         displayData();
-      }
-   }, 250);
+  setTimeout(() => {
+    if (ID < 671) {
+      ID++;
+      getCharacter();
+    }
+  }, 250);
 });
 prevBtn.addEventListener("click", () => {
-   setTimeout(() => {
-      if (ID > 1) {
-         ID--;
-         displayData();
-      }
-   }, 250);
+  setTimeout(() => {
+    if (ID > 1) {
+      ID--;
+      getCharacter();
+    }
+  }, 250);
 });
